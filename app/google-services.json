@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "107147767052",
+    "firebase_url": "https://digiwall-410c8.firebaseio.com",
+    "project_id": "digiwall-410c8",
+    "storage_bucket": "digiwall-410c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107147767052:android:202724b859e8d62075ed29",
+        "android_client_info": {
+          "package_name": "com.example.digiwall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107147767052-hid5so9qplu6s2q19pfuhnfdk4eir6bp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.digiwall",
+            "certificate_hash": "4e2762f4f91b3cdff827b956b65f830e994f5cd0"
+          }
+        },
+        {
+          "client_id": "107147767052-mjtanmt3nl971bdb11ugoj6981f1msbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbzODCVcs3-sVr1pe-91i8rDPfj_dE23U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107147767052-mjtanmt3nl971bdb11ugoj6981f1msbf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
