@@ -11,6 +11,77 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
+    <ImageView
+        android:layout_width="@dimen/logo_w_h"
+        android:layout_height="@dimen/logo_w_h"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/ic_launcher" />
 
+
+    <EditText
+        android:id="@+id/email_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:maxLines="1"
+        android:background="@color/white"
+        android:hint="Email/Username"
+        android:singleLine="true"
+        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/password_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:focusableInTouchMode="true"
+        android:hint="Password"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/Cpassword_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:padding="15dp"
+        android:background="@color/white"
+        android:inputType="textPassword"
+        android:layout_marginBottom="50dp"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TC"/>
+
+    <Button
+        android:id="@+id/sign_up_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:background="#6213D5"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:text="@string/btn_link_to_login"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
 
 </LinearLayout>
