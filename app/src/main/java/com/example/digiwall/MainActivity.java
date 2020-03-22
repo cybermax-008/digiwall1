@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnLogOut;
+    private ProgressDialog mDialog;
+
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -20,7 +24,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth=FirebaseAuth.getInstance();
+
+        btnLogOut=findViewById(R.id.btn_logOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.LogOut();
+            }
+        });
     }
 
+    private void LogOut(){
+        mAuth.signOut();
+        finish();
+        startActivity(new Intent(this,LoginActivity.class));
 
+    }
 }
