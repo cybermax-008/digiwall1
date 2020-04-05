@@ -1,2 +1,2 @@
-# digiwall1
+# Digiwall1
 App Specifications
