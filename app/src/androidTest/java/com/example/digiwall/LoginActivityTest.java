@@ -77,6 +77,14 @@ public class LoginActivityTest {
         onView(withId(R.id.btn_login)).perform(click());
         onView(withText(R.string.minimum_password)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters!")));
     }
+    @Test
+    public void ToastCheckVerificationRequired()
+    {
+        onView(withId(R.id.email_login)).perform(typeText("saisankeerthreddym@gmail.com"));
+        onView(withId(R.id.password_login)).perform(typeText("saivaishu10"));
+        onView(withId(R.id.btn_login)).perform(click());
+        onView(withText(R.string.requires_verification)).inRoot(new ToastMatcher()).check(matches(withText("Email not verified yet!")));
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
