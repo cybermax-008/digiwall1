@@ -113,6 +113,9 @@ public class LoginActivityTest {
         Activity MainActivity = getInstrumentation().waitForMonitorWithTimeout(MainActivitymonitor,10000);
         assertNotNull(MainActivity);
         onView(withId(R.id.profile)).perform(click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Log Out")).perform(click());
+        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logged Out Succesfully!")));
     }
     @Test
     public void ToastCheckVerificationRequired()
