@@ -111,6 +111,8 @@ public class ProfileFragment extends Fragment {
         Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
         //add commit 1
         //add commit 2
+        //add commit 3
+
     }
 }
 
