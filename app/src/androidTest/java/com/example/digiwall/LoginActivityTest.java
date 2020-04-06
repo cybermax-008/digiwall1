@@ -37,6 +37,16 @@ public class LoginActivityTest {
         View view = mActivity.findViewById(R.id.btn_login);
         assertNotNull(view);
     }
+    @Test
+    public void SuccessfulLoginTest() {
+        onView(withId(R.id.email_login)).perform(typeText("saisankeerthreddy909@gmail.com"));
+        onView(withId(R.id.password_login)).perform(typeText("saivaishu10"));
+        onView(withId(R.id.btn_login)).perform(click());
+        onView(withText(R.string.login_successfull)).inRoot(new ToastMatcher()).check(matches(withText("Login Successfull!")));
+        Activity MainActivity = getInstrumentation().waitForMonitorWithTimeout(MainActivitymonitor,5000);
+        assertNotNull(MainActivity);
+        MainActivity.finish();
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
