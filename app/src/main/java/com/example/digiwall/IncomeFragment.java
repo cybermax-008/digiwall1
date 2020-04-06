@@ -49,6 +49,8 @@ public class IncomeFragment extends Fragment {
     //TextView Total amount
     private TextView income_total;
 
+    private FirebaseRecyclerAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +74,6 @@ public class IncomeFragment extends Fragment {
 
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         mIncomeDatabase.addValueEventListener(new ValueEventListener() {
@@ -99,18 +100,12 @@ public class IncomeFragment extends Fragment {
             }
         });
 
-        return myview;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
                 .setQuery(mIncomeDatabase,Data.class)
                 .build();
 
-        final FirebaseRecyclerAdapter<Data,MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final MyViewHolder holder, int position, @NonNull Data model) {
 
@@ -150,10 +145,26 @@ public class IncomeFragment extends Fragment {
             }
         };
         recyclerView.setAdapter(adapter);
-        adapter.startListening();
+
+        return myview;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        adapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
 
