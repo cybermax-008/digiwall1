@@ -53,3 +53,30 @@ public class HomeFragment extends Fragment {
     private IncomeFragment incomeFragment;
     private ExpenseFragment expenseFragment;
 }
+    public HomeFragment() {
+
+        // Required empty public constructor
+    }
+
+    //Floating button
+    private FloatingActionButton fab_main;
+    private FloatingActionButton fab_expense;
+    private FloatingActionButton fab_income;
+
+    //Floating text
+    private TextView fabTxt_expense;
+    private TextView fabTxt_income;
+
+
+    private View myview;
+
+    //boolean
+    private boolean isOpen =false;
+
+    //Animation
+    private Animation FadeOpen,FadeClose;
+
+    //Firebase
+    private FirebaseAuth mAuth;
+    private DatabaseReference mIncomeDatabase;
+    private DatabaseReference mExpenseDatabase;
