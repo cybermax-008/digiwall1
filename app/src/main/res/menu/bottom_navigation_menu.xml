@@ -14,10 +14,7 @@
         android:id="@+id/expense"
         android:icon="@drawable/minus" />
 
-    <item
-        android:title="Transactions"
-        android:id="@+id/transactions"
-        android:icon="@drawable/ic_history_black_24dp"/>
+    
     <item
         android:title="Profile"
         android:id="@+id/profile"
