@@ -61,6 +61,14 @@ public class LoginActivityTest {
         assertNotNull(ResetActivity);
         ResetActivity.finish();
     }
+    @Test
+    public void ToastCheckIncorrectPasswordLenGretSix()
+    {
+        onView(withId(R.id.email_login)).perform(typeText("saisankeerthreddy909@gmail.com"));
+        onView(withId(R.id.password_login)).perform(typeText("saivaishu1"));
+        onView(withId(R.id.btn_login)).perform(click());
+        onView(withText(R.string.auth_failed)).inRoot(new ToastMatcher()).check(matches(withText("Authentication failed, check your email and password or sign up")));
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
