@@ -182,6 +182,7 @@ public class IncomeFragment extends Fragment {
             String stamount=String.valueOf(amount);
             mAmount.setText(stamount);
             //add commit 4
+            //add commit 5
 
         }
 
