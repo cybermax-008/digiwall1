@@ -45,7 +45,9 @@ public class LoginActivityTest {
         onView(withText(R.string.login_successfull)).inRoot(new ToastMatcher()).check(matches(withText("Login Successfull!")));
         Activity MainActivity = getInstrumentation().waitForMonitorWithTimeout(MainActivitymonitor,5000);
         assertNotNull(MainActivity);
-        MainActivity.finish();
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Log Out")).perform(click());
+        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logout Successful!")));
     }
     @Test
     public void RegistrationPageTest() {
