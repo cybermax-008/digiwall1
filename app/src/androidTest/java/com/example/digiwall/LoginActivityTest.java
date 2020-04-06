@@ -54,6 +54,13 @@ public class LoginActivityTest {
         assertNotNull(SigupActivity);
         SigupActivity.finish();
     }
+    @Test
+    public void ResetActivityTest() {
+        onView(withId(R.id.forgot_password)).perform(click());
+        Activity ResetActivity = getInstrumentation().waitForMonitorWithTimeout(ResetActivitymonitor,5000);
+        assertNotNull(ResetActivity);
+        ResetActivity.finish();
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
