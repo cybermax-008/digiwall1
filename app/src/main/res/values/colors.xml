@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimary">#E47B2A</color>
     <color name="colorPrimaryDark">#2196F3</color>
     <color name="colorAccent">#03A9F4</color>
     <color name="white">#ffffff</color>
@@ -12,10 +12,6 @@
     <color name="btn_login_register">#2196F3</color>
     <color name="btn_register">#0D47A1</color>
     <color name="btn_logut">#ff6861</color>
-    <color name="toolbar_color">#FF031A6D</color>
-    <color name="nav_header">#020202</color>
-    <color name="dashboard_color">#FF2856E0</color>
-    <color name="income_color">#FF1C2D8A</color>
-    <color name="expense_color">#FF0F2497</color>
-    <color name="date_color">#FFE71A0C</color>
+    <color name="violet">#5e35b1</color>
+
 </resources>
