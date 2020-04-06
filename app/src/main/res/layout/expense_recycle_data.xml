@@ -10,70 +10,147 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6 June 2018"
-                android:textColor="@color/violet"
+                android:text="Name:"
+                android:paddingRight="10dp"
+                android:textColor="@color/input_login"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textStyle="bold"
-                android:id="@+id/date_txt_expense"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+                android:textStyle="italic" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Type"
+                android:text="Name of the expense"
                 android:maxLines="1"
                 android:textColor="@color/violet"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textStyle="bold"
-                android:id="@+id/type_txt_expense" />
+                android:textSize="10sp"
+                android:textStyle="italic"
+                android:id="@+id/name_txt_expense" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6 June 2018"
+                    android:padding="6dp"
+                    android:textColor="@color/input_login"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    android:id="@+id/date_txt_expense"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6000"
+                    android:padding="6dp"
+                    android:textColor="#990606"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    android:id="@+id/amount_txt_expense"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textAllCaps="true"
+                    android:text="CAD"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category:"
+                    android:maxLines="1"
+                    android:textColor="@color/violet"
+                    android:textSize="10sp"
+                    android:textStyle="italic"
+                    android:id="@+id/type_txt_expense" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category name"
+                    android:maxLines="1"
+                    android:padding="4dp"
+                    android:textColor="@color/violet"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    android:id="@+id/category_txt_expense"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Note"
-                android:maxLines="1"
-                android:layout_below="@+id/type_txt_expense"
-                android:textColor="@color/violet"
+                android:text="Note:"
+                android:paddingRight="5dp"
+                android:textColor="@color/input_login"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textStyle="bold"
-                android:id="@+id/note_txt_expense"/>
+                android:textStyle="italic" />
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Note about the expense"
+                    android:maxLines="1"
+                    android:textColor="@color/violet"
+                    android:textSize="10sp"
+                    android:textStyle="italic"
+                    android:id="@+id/note_txt_expense" />
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="6000"
-                android:textColor="@color/violet"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textStyle="bold"
-                android:id="@+id/amount_txt_expense"/>
-
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

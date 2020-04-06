@@ -137,12 +137,34 @@ public class IncomeFragment extends Fragment {
 
         adapter.startListening();
 
+        if(searchView != null){
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+
+                    search(newText);
+                    return true;
+                }
+            });
+        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    private void search(String str){
+
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
