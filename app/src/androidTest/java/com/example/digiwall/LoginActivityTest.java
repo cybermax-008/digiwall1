@@ -47,6 +47,13 @@ public class LoginActivityTest {
         assertNotNull(MainActivity);
         MainActivity.finish();
     }
+    @Test
+    public void RegistrationPageTest() {
+        onView(withId(R.id.btn_noaccount)).perform(click());
+        Activity SigupActivity = getInstrumentation().waitForMonitorWithTimeout(SigupActivitymonitor,5000);
+        assertNotNull(SigupActivity);
+        SigupActivity.finish();
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
