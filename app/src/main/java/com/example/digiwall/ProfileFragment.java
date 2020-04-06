@@ -106,3 +106,9 @@ public class ProfileFragment extends Fragment {
 
         return myview;
     }
+
+    public void showToast(String toastText) {
+        Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
+    }
+}
+
