@@ -181,6 +181,7 @@ public class IncomeFragment extends Fragment {
             TextView mAmount=mView.findViewById(R.id.amount_txt_income);
             String stamount=String.valueOf(amount);
             mAmount.setText(stamount);
+            //add commit 4
 
         }
 
