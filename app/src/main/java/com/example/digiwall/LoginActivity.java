@@ -130,13 +130,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     if(mAuth.getCurrentUser().isEmailVerified()){
                         mDialog.dismiss();
-                        showToast("Login Successful!");
+                        showToast(getString(R.string.login_successfull));
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         LoginActivity.this.finish();
                     }
                     else{
                         mDialog.dismiss();
-                        showToast("Email not verified yet!");
+                        showToast(getString(R.string.requires_verification));
                     }
 
                 } else {
