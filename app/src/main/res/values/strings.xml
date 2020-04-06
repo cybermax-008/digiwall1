@@ -29,8 +29,6 @@
     <string name="leftNavi">&lt;</string>
     <string name="login_successfull">"Login Successfull!"</string>
     <string name="requires_verification">"Email not verified yet!"</string>
-    <string name="login_successfull">"Login Successfull!"</string>
-    <string name="requires_verification">"Email not verified yet!"</string>
     <string name="logoutsuccessful">"Logout Successful!"</string>
     <string name="email_verification">"Resitration Successful! Check your Email for Verification link!"</string>
 
