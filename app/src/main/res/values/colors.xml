@@ -12,4 +12,10 @@
     <color name="btn_login_register">#2196F3</color>
     <color name="btn_register">#0D47A1</color>
     <color name="btn_logut">#ff6861</color>
+    <color name="toolbar_color">#FF031A6D</color>
+    <color name="nav_header">#020202</color>
+    <color name="dashboard_color">#FF2856E0</color>
+    <color name="income_color">#FF1C2D8A</color>
+    <color name="expense_color">#FF0F2497</color>
+    <color name="date_color">#FFE71A0C</color>
 </resources>
