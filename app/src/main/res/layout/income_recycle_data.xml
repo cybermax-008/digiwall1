@@ -72,3 +72,8 @@
                 android:id="@+id/amount_txt_income"/>
 
         </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
