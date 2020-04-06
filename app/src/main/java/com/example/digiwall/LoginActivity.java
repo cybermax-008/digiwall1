@@ -3,128 +3,160 @@ package com.example.digiwall;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
-public class SignupActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    // Firebase
-    private FirebaseAuth mAuth;
-
-    //Progress Dialog
-    private ProgressDialog mDialog;
+    private static final String TAG = "AndroidClarified";
+    private SignInButton googleSignInButton;
 
     //intitializing the variables in registration page
     private EditText mEmail;
     private EditText mPass;
-    private Button btnReg;
-    private TextView msignIn;
+    private Button btnLogin;
+    private TextView mForgotPassword;
+    private TextView mSignupHere;
 
+    private ProgressDialog mDialog;
+
+    // Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_login);
 
-        //assigninig registration variables given by the user.
-        mEmail=findViewById(R.id.email_reg);
-        mPass=findViewById(R.id.password_reg);
-        btnReg=findViewById(R.id.sign_up_button);
-        msignIn=findViewById(R.id.sign_in_button);
+        //assigninig Login variables given by the user.
+        mEmail = findViewById(R.id.email_login);
+        mPass = findViewById(R.id.password_login);
+        btnLogin = findViewById(R.id.btn_login);
+        mForgotPassword = findViewById(R.id.forgot_password);
+        mSignupHere = findViewById(R.id.btn_noaccount);
+        //Assigning google signIn btn
+        googleSignInButton = findViewById(R.id.sign_in_button);
 
+        // Start Firebase Instance
         mAuth=FirebaseAuth.getInstance();
+        mUser=mAuth.getCurrentUser();
 
-        mDialog=new ProgressDialog(this);
+        if(mUser != null && mUser.isEmailVerified()){
 
-        // Register Button
-        btnReg.setOnClickListener(new View.OnClickListener() {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
+        }
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+
+        mDialog = new ProgressDialog(this);
+
+
+        //Login Button
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignupActivity.this.registration();
+                LoginActivity.this.loginDetails();
             }
         });
 
 
-        // Already have an account? Login
-        msignIn.setOnClickListener(new View.OnClickListener() {
+        //Don't have an account? Register
+        mSignupHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignupActivity.this.finish();
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
 
+        // Forgot Password?
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ResetActivity.class));
+            }
+        });
 
     }
 
-    //Registration
+    //Login
+    private void loginDetails() {
 
-    private void registration(){
+        String email = mEmail.getText().toString().trim();
+        final String pass = mPass.getText().toString().trim();
 
-        String email=mEmail.getText().toString().trim();
-        String pass=mPass.getText().toString().trim();
-
-        //Check if empty email is provided
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             mEmail.setError("Valid Email Required!");
-            return;
-        }
-        if(TextUtils.isEmpty(pass)){
-            mPass.setError("Valid Password Required!");
+
             return;
         }
 
-        if(pass.length() < 6){
-            showToast("Password too short, enter minimum 6 characters");
+        if (TextUtils.isEmpty(pass)) {
+            mPass.setError("Valid Password Required!");
+
             return;
         }
 
         mDialog.setMessage("Processing..");
         mDialog.show();
 
-        mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    if(mAuth.getCurrentUser().isEmailVerified()){
+                        mDialog.dismiss();
+                        showToast("Login Successful!");
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        LoginActivity.this.finish();
+                    }
+                    else{
+                        mDialog.dismiss();
+                        showToast("Email not verified yet!");
+                    }
 
-                if(task.isSuccessful()){
-
-                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                mDialog.dismiss();
-                                showToast("Resitration Successful! Check your Email for Verification link!");
-                                //SignupActivity.this.startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                SignupActivity.this.finish();
-                            }
-                            else{
-                                showToast("Registration Failed! "+task.getException());
-                            }
-                        }
-                    });
-                }
-                else{
+                } else {
                     mDialog.dismiss();
-                    SignupActivity.this.showToast("Authentication failed. " + task.getException());
+                    if (pass.length() < 6) {
+                        showToast(getString(R.string.minimum_password));
+                    } else {
+                        showToast(getString(R.string.auth_failed));
+                    }
 
                 }
             }
         });
+
+
     }
+
+
 
     public void showToast(String toastText) {
         Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
     }
-
 }
