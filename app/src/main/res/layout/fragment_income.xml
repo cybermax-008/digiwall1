@@ -33,12 +33,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/input_login"
-                    android:text="Income"/>
+                
             </RelativeLayout>
 
             <RelativeLayout
