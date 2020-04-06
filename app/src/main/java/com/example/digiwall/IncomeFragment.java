@@ -49,6 +49,8 @@ public class IncomeFragment extends Fragment {
     //TextView Total amount
     private TextView income_total;
 
+    private FirebaseRecyclerAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +74,6 @@ public class IncomeFragment extends Fragment {
 
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         mIncomeDatabase.addValueEventListener(new ValueEventListener() {
@@ -99,44 +100,19 @@ public class IncomeFragment extends Fragment {
             }
         });
 
-        return myview;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
                 .setQuery(mIncomeDatabase,Data.class)
                 .build();
 
-        final FirebaseRecyclerAdapter<Data,MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final MyViewHolder holder, int position, @NonNull Data model) {
+            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Data model) {
 
-                mIncomeDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        Data data =dataSnapshot.getValue(Data.class);
-
-                        String userType= data.getType();
-                        String userNote= data.getNote();
-                        String userDate= data.getDate();
-                        int userAmount= data.getAmount();
-
-                        holder.setType(userType);
-                        holder.setNote(userNote);
-                        holder.setDate(userDate);
-                        holder.setAmount(userAmount);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                holder.setType(model.getType());
+                holder.setNote(model.getNote());
+                holder.setDate(model.getDate());
+                holder.setAmount(model.getAmount());
             }
 
             @NonNull
@@ -150,7 +126,23 @@ public class IncomeFragment extends Fragment {
             }
         };
         recyclerView.setAdapter(adapter);
+
+        return myview;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         adapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
