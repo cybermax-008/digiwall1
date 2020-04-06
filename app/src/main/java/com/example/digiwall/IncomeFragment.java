@@ -107,31 +107,12 @@ public class IncomeFragment extends Fragment {
 
         adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final MyViewHolder holder, int position, @NonNull Data model) {
+            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Data model) {
 
-                mIncomeDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        Data data =dataSnapshot.getValue(Data.class);
-
-                        String userType= data.getType();
-                        String userNote= data.getNote();
-                        String userDate= data.getDate();
-                        int userAmount= data.getAmount();
-
-                        holder.setType(userType);
-                        holder.setNote(userNote);
-                        holder.setDate(userDate);
-                        holder.setAmount(userAmount);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                holder.setType(model.getType());
+                holder.setNote(model.getNote());
+                holder.setDate(model.getDate());
+                holder.setAmount(model.getAmount());
             }
 
             @NonNull
@@ -164,7 +145,7 @@ public class IncomeFragment extends Fragment {
         adapter.stopListening();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
 

@@ -14,6 +14,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.digiwall.model.Data;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +48,8 @@ public class ExpenseFragment extends Fragment {
     //TextView Total amount
     private TextView expense_total;
 
+    private FirebaseRecyclerAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +73,6 @@ public class ExpenseFragment extends Fragment {
 
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
@@ -94,8 +97,87 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
+        FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
+                .setQuery(mExpenseDatabase,Data.class)
+                .build();
 
+        adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull final MyViewHolder holder, int position, @NonNull Data model) {
 
+                holder.setType(model.getType());
+                holder.setNote(model.getNote());
+                holder.setDate(model.getDate());
+                holder.setAmount(model.getAmount());
+
+            }
+
+            @NonNull
+            @Override
+            public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.expense_recycle_data,parent,false);
+                MyViewHolder viewHolder=new MyViewHolder(view);
+                return viewHolder;
+            }
+        };
+        recyclerView.setAdapter(adapter);
         return myview;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        adapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+
+        View mView;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.mView = itemView;
+        }
+
+
+        private void setType(String type){
+
+            TextView mType=mView.findViewById(R.id.type_txt_expense);
+            mType.setText(type);
+
+        }
+
+        private void setNote(String note){
+
+            TextView mNote=mView.findViewById(R.id.note_txt_expense);
+            mNote.setText(note);
+
+        }
+
+        private void setDate(String date){
+
+            TextView mDate=mView.findViewById(R.id.date_txt_expense);
+            mDate.setText(date);
+
+        }
+
+        private void setAmount(int amount){
+
+            TextView mAmount=mView.findViewById(R.id.amount_txt_expense);
+            String stamount=String.valueOf(amount);
+            mAmount.setText(stamount);
+
+        }
+
+
     }
 }
