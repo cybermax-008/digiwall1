@@ -104,7 +104,7 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 mDialog.dismiss();
-                                showToast("Resitration Successful! Check your Email for Verification link!");
+                                showToast(getString(R.string.email_verification));
                                 //SignupActivity.this.startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                 SignupActivity.this.finish();
                             }

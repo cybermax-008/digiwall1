@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 showToast("Settings");
                 break;
             case R.id.btn_logOut:
-                showToast("Logged Out Succesfully!");
+                showToast(getString(R.string.logoutsuccessful));
                 LogOut();
 
         }

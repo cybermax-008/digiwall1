@@ -11,7 +11,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -33,8 +35,18 @@ public class LoginActivityTest {
         mActivity = mlogin.getActivity();
     }
     @Test
-    public void buttonCheck() {
+    public void LoginButtonCheck() {
         View view = mActivity.findViewById(R.id.btn_login);
+        assertNotNull(view);
+    }
+    @Test
+    public void SignupButtonCheck() {
+        View view = mActivity.findViewById(R.id.btn_noaccount);
+        assertNotNull(view);
+    }
+    @Test
+    public void ForgotPasswordButtonCheck() {
+        View view = mActivity.findViewById(R.id.forgot_password);
         assertNotNull(view);
     }
     @Test
@@ -47,7 +59,7 @@ public class LoginActivityTest {
         assertNotNull(MainActivity);
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Log Out")).perform(click());
-        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logout Successful!")));
+        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logged Out Succesfully!")));
     }
     @Test
     public void RegistrationPageTest() {
@@ -90,13 +102,13 @@ public class LoginActivityTest {
     @Test
     public void RegisterTest() {
         onView(withId(R.id.btn_noaccount)).perform(click());
-        onView(withId(R.id.email_reg)).perform(typeText("chitraaa11295@gmail.com"));
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth14@gmail.com"));
         onView(withId(R.id.password_reg)).perform(typeText("saivaishu10"));
         onView(withId(R.id.Cpassword_reg)).perform(typeText("saivaishu10"));
         closeSoftKeyboard();
         onView(withId(R.id.TC_Signup)).perform(click());
         onView(withId(R.id.sign_up_button)).perform(click());
-        onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Resitration Successful! Check your Email for Verification link!")));
+        onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Registration Successful! Check your Email for Verification link!")));
     }
     @After
     public void tearDown() throws Exception {
