@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".IncomeFragment">
+
     <SearchView
         android:id="@+id/searchViewExpense"
         android:layout_width="match_parent"
@@ -59,3 +60,13 @@
 
         </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycle_expense">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
