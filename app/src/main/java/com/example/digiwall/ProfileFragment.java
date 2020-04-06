@@ -109,6 +109,7 @@ public class ProfileFragment extends Fragment {
 
     public void showToast(String toastText) {
         Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
+        //add commit 1
     }
 }
 
