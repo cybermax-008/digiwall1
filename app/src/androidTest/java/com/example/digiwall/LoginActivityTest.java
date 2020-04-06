@@ -100,6 +100,9 @@ public class LoginActivityTest {
         Activity MainActivity = getInstrumentation().waitForMonitorWithTimeout(MainActivitymonitor,5000);
         assertNotNull(MainActivity);
         onView(withId(R.id.income)).perform(click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Log Out")).perform(click());
+        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logged Out Succesfully!")));
     }
     @Test
     public void ExpenseFragmentTest() {
