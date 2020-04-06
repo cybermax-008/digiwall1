@@ -92,6 +92,20 @@ public class LoginActivityTest {
         onView(withText(R.string.minimum_password)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters!")));
     }
     @Test
+    public void ExpenseFragmentTest() {
+        onView(withId(R.id.email_login)).perform(typeText("saisankeerthreddy909@gmail.com"));
+        onView(withId(R.id.password_login)).perform(typeText("saivaishu10"));
+        onView(withId(R.id.btn_login)).perform(click());
+        onView(withText(R.string.login_successfull)).inRoot(new ToastMatcher()).check(matches(withText("Login Successfull!")));
+        Activity MainActivity = getInstrumentation().waitForMonitorWithTimeout(MainActivitymonitor,10000);
+        assertNotNull(MainActivity);
+        onView(withId(R.id.expense)).perform(click());
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText("Log Out")).perform(click());
+        onView(withText(R.string.logoutsuccessful)).inRoot(new ToastMatcher()).check(matches(withText("Logged Out Succesfully!")));
+    }
+   
+    @Test
     public void ToastCheckVerificationRequired()
     {
         onView(withId(R.id.email_login)).perform(typeText("saisankeerthreddym@gmail.com"));
