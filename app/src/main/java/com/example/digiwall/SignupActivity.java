@@ -86,7 +86,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if(pass.length() < 6){
-            showToast("Password too short, enter minimum 6 characters");
+            showToast(getString(R.string.failed_email_verification));
             return;
         }
 
