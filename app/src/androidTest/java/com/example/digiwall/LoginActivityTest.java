@@ -141,7 +141,7 @@ public class LoginActivityTest {
     @Test
     public void RegisterTest() {
         onView(withId(R.id.btn_noaccount)).perform(click());
-        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth14@gmail.com"));
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth112344@gmail.com"));
         onView(withId(R.id.password_reg)).perform(typeText("saivaishu10"));
         onView(withId(R.id.Cpassword_reg)).perform(typeText("saivaishu10"));
         closeSoftKeyboard();

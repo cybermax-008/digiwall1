@@ -22,20 +22,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
 
-public class MainActivityTest {
-    @Rule
-    public ActivityTestRule<LoginActivity> mlogin=new ActivityTestRule<LoginActivity>(LoginActivity.class);
-    private LoginActivity mActivity = null;
-    Instrumentation.ActivityMonitor MainActivitymonitor = getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
-    Instrumentation.ActivityMonitor SigupActivitymonitor = getInstrumentation().addMonitor(SignupActivity.class.getName(),null,false);
-    Instrumentation.ActivityMonitor ResetActivitymonitor = getInstrumentation().addMonitor(ResetActivity.class.getName(),null,false);
-
-    @Before
-    public void setUp() throws Exception {
-        mActivity = mlogin.getActivity();
-    }
-    package com.example.digiwall;
-
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.view.View;
@@ -58,7 +44,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
 
-public class LoginActivityTest {
+public class SignupActivityTest {
     @Rule
     public ActivityTestRule<LoginActivity> mlogin=new ActivityTestRule<LoginActivity>(LoginActivity.class);
     private LoginActivity mActivity = null;
@@ -71,28 +57,18 @@ public class LoginActivityTest {
         mActivity = mlogin.getActivity();
     }
     @Test
-    public void RegistrationButtonCheck() {
-        onView(withId(R.id.btn_noaccount)).perform(click());
-        Activity SigupActivity = getInstrumentation().waitForMonitorWithTimeout(SigupActivitymonitor,5000);
-        assertNotNull(SigupActivity);
-        View view = mActivity.findViewById(R.id.sign_up_button);
-        assertNotNull(view);
-        SigupActivity.finish();
-    }
-    @Test
     public void GoToLoginButtonCheck() {
         onView(withId(R.id.btn_noaccount)).perform(click());
         Activity SigupActivity = getInstrumentation().waitForMonitorWithTimeout(SigupActivitymonitor,5000);
         assertNotNull(SigupActivity);
         View view = mActivity.findViewById(R.id.sign_in_button);
         assertNotNull(view);
-        SigupActivity.finish();
-
+        onView(withId(R.id.sign_in_button)).perform(click());
     }
     @Test
     public void SuccessfulRegistrationTest() {
         onView(withId(R.id.btn_noaccount)).perform(click());
-        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth1480@gmail.com"));
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth1180@gmail.com"));
         onView(withId(R.id.password_reg)).perform(typeText("saivaishu10"));
         onView(withId(R.id.Cpassword_reg)).perform(typeText("saivaishu10"));
         closeSoftKeyboard();
@@ -110,8 +86,7 @@ public class LoginActivityTest {
         onView(withId(R.id.TC_Signup)).perform(click());
         onView(withId(R.id.sign_up_button)).perform(click());
         onView(withText(R.string.failed_email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters")));
-        SigupActivity.finish();
-
+        onView(withId(R.id.sign_in_button)).perform(click());
     }
     @After
     public void tearDown() throws Exception {
