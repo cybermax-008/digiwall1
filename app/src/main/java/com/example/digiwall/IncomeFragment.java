@@ -112,6 +112,7 @@ public class IncomeFragment extends Fragment {
                 holder.setType(model.getType());
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
+                holder.setName(model.getName());
                 holder.setAmount(model.getAmount());
             }
 
@@ -188,6 +189,13 @@ public class IncomeFragment extends Fragment {
 
             TextView mNote=mView.findViewById(R.id.note_txt_income);
             mNote.setText(note);
+
+        }
+
+        private void setName(String name){
+
+            TextView mNote=mView.findViewById(R.id.name_txt_income);
+            mNote.setText(name);
 
         }
 
