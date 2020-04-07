@@ -78,7 +78,7 @@ public class ExpenseFragment extends Fragment {
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int totalvalue=0;
+                double totalvalue=0.0;
 
                 for(DataSnapshot mysnapshot: dataSnapshot.getChildren() ) {
 
@@ -86,7 +86,7 @@ public class ExpenseFragment extends Fragment {
 
                     totalvalue += data.getAmount();
 
-                    String stTotalvalue = String.valueOf(totalvalue);
+                    String stTotalvalue= String.format("%.2f", totalvalue);
                     expense_total.setText(stTotalvalue+ " CAD");
                 }
             }
@@ -108,6 +108,7 @@ public class ExpenseFragment extends Fragment {
                 holder.setType(model.getType());
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
+                holder.setName(model.getName());
                 holder.setAmount(model.getAmount());
 
             }
@@ -162,6 +163,12 @@ public class ExpenseFragment extends Fragment {
             mNote.setText(note);
 
         }
+        private void setName(String name){
+
+            TextView mNote=mView.findViewById(R.id.name_txt_expense);
+            mNote.setText(name);
+
+        }
 
         private void setDate(String date){
 
@@ -170,7 +177,7 @@ public class ExpenseFragment extends Fragment {
 
         }
 
-        private void setAmount(int amount){
+        private void setAmount(double amount){
 
             TextView mAmount=mView.findViewById(R.id.amount_txt_expense);
             String stamount=String.valueOf(amount);

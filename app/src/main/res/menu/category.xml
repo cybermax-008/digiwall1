@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/food"
+        android:title="Food"/>
+    <item
+        android:id="@+id/entertainment"
+        android:title="Entertainment"/>
+    <item
+        android:id="@+id/health"
+        android:title="Health"/>
+    <item
+        android:id="@+id/rent"
+        android:title="Rent"/>
+    <item
+        android:id="@+id/internet"
+        android:title="Internet"/>
+    <item
+        android:id="@+id/grocery"
+        android:title="Grocery"/>
+    <item
+        android:id="@+id/transport"
+        android:title="Transport"/>
+
+
+
 </menu>

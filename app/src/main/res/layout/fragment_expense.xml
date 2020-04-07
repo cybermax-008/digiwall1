@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".IncomeFragment">
 
@@ -27,7 +26,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -38,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/input_login"
-                    android:text="Expense"/>
+                    android:text="Total Expense"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -52,7 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/input_login"
+                    android:textColor="#960814"
+                    android:textStyle="bold"
                     android:id="@+id/expense_txt_result"
                     android:text="0.00 CAD"/>
             </RelativeLayout>

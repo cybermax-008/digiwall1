@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.TestLooperManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         mIncomeDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int totalvalue=0;
+                double totalvalue=0.0;
 
                 for(DataSnapshot mysnapshot: dataSnapshot.getChildren() ){
 
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment {
 
                     totalvalue+=data.getAmount();
 
-                    String stTotalvalue= String.valueOf(totalvalue);
+                    String stTotalvalue= String.format("%.2f", totalvalue);
                     incomeButton.setText("Income\n"+stTotalvalue+" CAD");
 
                 }
@@ -126,7 +127,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                int totalvalue=0;
+                double totalvalue=0.0;
 
                 for(DataSnapshot mysnapshot: dataSnapshot.getChildren() ){
 
@@ -134,7 +135,7 @@ public class HomeFragment extends Fragment {
 
                     totalvalue+=data.getAmount();
 
-                    String stTotalvalue= String.valueOf(totalvalue);
+                    String stTotalvalue= String.format("%.2f", totalvalue);
                     expenseButton.setText("Expense\n"+stTotalvalue+" CAD");
 
                 }
@@ -211,20 +212,57 @@ public class HomeFragment extends Fragment {
         dialog.setCancelable(false);
 
         final EditText editAmount=myview.findViewById(R.id.amount_edit);
-        final EditText editType = myview.findViewById(R.id.type_edit);
+        final EditText editName = myview.findViewById(R.id.name_edit);
+        final TextView editType = myview.findViewById(R.id.type_edit);
         final EditText editNote = myview.findViewById(R.id.note_edit);
 
         Button btnSave=myview.findViewById(R.id.btn_save);
         Button btnCancel= myview.findViewById(R.id.btn_cancel);
 
+        editType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu datePopUp = new PopupMenu(getContext(),editType);
+                datePopUp.getMenuInflater().inflate(R.menu.category_income,datePopUp.getMenu());
+                datePopUp.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.salary:
+                                showToast(""+item.getTitle());
+                                editType.setText(item.getTitle());
+                                return true;
+                            case R.id.deposit:
+                                showToast(""+item.getTitle());
+                                editType.setText(item.getTitle());
+                                return true;
+                            case R.id.other:
+                                showToast(""+item.getTitle());
+                                editType.setText(item.getTitle());
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+                datePopUp.show();
+            }
+        });
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String name=editName.getText().toString().trim();
                 String type=editType.getText().toString().trim();
                 String amount=editAmount.getText().toString().trim();
                 String note=editNote.getText().toString().trim();
 
+                if(TextUtils.isEmpty(name)){
+
+                    editName.setError("Required Field..");
+                    return;
+                }
                 if(TextUtils.isEmpty(type)){
 
                     editType.setError("Required Field..");
@@ -237,7 +275,7 @@ public class HomeFragment extends Fragment {
                     return;
                 }
 
-                int OurAmt=Integer.parseInt(amount);
+                double OurAmt=Double.parseDouble(amount);
 
                 if(TextUtils.isEmpty(note)){
 
@@ -247,7 +285,7 @@ public class HomeFragment extends Fragment {
                 String id=mIncomeDatabase.push().getKey();
                 String mDate= DateFormat.getDateInstance().format(new Date());
 
-                Data data=new Data(OurAmt,type,note,id,mDate);
+                Data data=new Data(OurAmt,type,note,name,id,mDate);
 
                 mIncomeDatabase.child(id).setValue(data);
                 showToast("Data ADDED");
@@ -276,40 +314,90 @@ public class HomeFragment extends Fragment {
         AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
         LayoutInflater inflater=LayoutInflater.from(getActivity());
 
-        View myview=inflater.inflate(R.layout.insert_data,null);
+        View myview=inflater.inflate(R.layout.insert_data,null);    
         mydialog.setView(myview);
 
         final AlertDialog dialog=mydialog.create();
         dialog.setCancelable(false);
 
         final EditText amount=myview.findViewById(R.id.amount_edit);
-        final EditText type=myview.findViewById(R.id.type_edit);
+        final EditText name=myview.findViewById(R.id.name_edit);
+        final TextView type=myview.findViewById(R.id.type_edit);
         final EditText note=myview.findViewById(R.id.note_edit);
 
         Button btnSave=myview.findViewById(R.id.btn_save);
         Button btnCancel=myview.findViewById(R.id.btn_cancel);
 
+        type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu datePopUp = new PopupMenu(getContext(),type);
+                datePopUp.getMenuInflater().inflate(R.menu.category,datePopUp.getMenu());
+                datePopUp.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        String date;
+                        switch (item.getItemId()){
+                            case R.id.food:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+                            case R.id.entertainment:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+                            case R.id.health:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+                            case R.id.rent:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+                            case R.id.internet:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+
+                            case R.id.grocery:
+                                showToast(""+item.getTitle());
+                                type.setText(item.getTitle());
+                                return true;
+
+                        }
+                        return false;
+                    }
+                });
+                datePopUp.show();
+            }
+        });
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String tmName=name.getText().toString().trim();
                 String tmAmount = amount.getText().toString().trim();
                 String tmType = type.getText().toString().trim();
                 String tmNote = note.getText().toString().trim();
 
+                if(TextUtils.isEmpty(tmName)){
+
+                    name.setError("Required Field..");
+                    return;
+                }
                 if(TextUtils.isEmpty(tmType)){
 
                     type.setError("Required Field..");
                     return;
                 }
-
                 if(TextUtils.isEmpty(tmAmount)){
 
                     amount.setError("Required Field..");
                     return;
                 }
 
-                int inAmt=Integer.parseInt(tmAmount);
+                double inAmt=Double.parseDouble(tmAmount);
 
                 if(TextUtils.isEmpty(tmNote)){
 
@@ -319,7 +407,7 @@ public class HomeFragment extends Fragment {
                 String id=mExpenseDatabase.push().getKey();
                 String mDate= DateFormat.getDateInstance().format(new Date());
 
-                Data data=new Data(inAmt,tmType,tmNote,id,mDate);
+                Data data=new Data(inAmt,tmType,tmNote,tmName,id,mDate);
 
                 mExpenseDatabase.child(id).setValue(data);
                 showToast("Data ADDED");

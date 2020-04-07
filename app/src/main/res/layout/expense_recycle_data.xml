@@ -35,9 +35,9 @@
                 android:layout_height="wrap_content"
                 android:text="Name of the expense"
                 android:maxLines="1"
-                android:textColor="@color/violet"
-                android:textSize="10sp"
-                android:textStyle="italic"
+                android:textColor="@color/btn_logut"
+                android:textSize="19sp"
+                android:textStyle="bold"
                 android:id="@+id/name_txt_expense" />
 
 
@@ -101,10 +101,10 @@
                     android:layout_height="wrap_content"
                     android:text="Category:"
                     android:maxLines="1"
-                    android:textColor="@color/violet"
+                    android:textColor="@color/input_login"
                     android:textSize="10sp"
                     android:textStyle="italic"
-                    android:id="@+id/type_txt_expense" />
+                     />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                     android:textColor="@color/violet"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="bold"
-                    android:id="@+id/category_txt_expense"/>
+                    android:id="@+id/type_txt_expense"/>
 
             </LinearLayout>
 
@@ -131,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Note:"
+                android:textSize="15sp"
                 android:paddingRight="5dp"
                 android:textColor="@color/input_login"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -141,8 +142,8 @@
                     android:layout_height="wrap_content"
                     android:text="Note about the expense"
                     android:maxLines="1"
-                    android:textColor="@color/violet"
-                    android:textSize="10sp"
+                    android:textColor="@color/input_login"
+                    android:textSize="13sp"
                     android:textStyle="italic"
                     android:id="@+id/note_txt_expense" />
 
