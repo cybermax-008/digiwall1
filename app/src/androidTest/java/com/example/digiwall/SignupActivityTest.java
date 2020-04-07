@@ -77,6 +77,7 @@ public class LoginActivityTest {
         assertNotNull(SigupActivity);
         View view = mActivity.findViewById(R.id.sign_up_button);
         assertNotNull(view);
+        SigupActivity.finish();
     }
     @Test
     public void GoToLoginButtonCheck() {
@@ -85,8 +86,20 @@ public class LoginActivityTest {
         assertNotNull(SigupActivity);
         View view = mActivity.findViewById(R.id.sign_in_button);
         assertNotNull(view);
-    }
+        SigupActivity.finish();
 
+    }
+    @Test
+    public void SuccessfulRegistrationTest() {
+        onView(withId(R.id.btn_noaccount)).perform(click());
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth1480@gmail.com"));
+        onView(withId(R.id.password_reg)).perform(typeText("saivaishu10"));
+        onView(withId(R.id.Cpassword_reg)).perform(typeText("saivaishu10"));
+        closeSoftKeyboard();
+        onView(withId(R.id.TC_Signup)).perform(click());
+        onView(withId(R.id.sign_up_button)).perform(click());
+        onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Registration Successful! Check your Email for Verification link!")));
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
