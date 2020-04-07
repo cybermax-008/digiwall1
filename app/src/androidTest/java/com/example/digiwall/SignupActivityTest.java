@@ -109,7 +109,7 @@ public class LoginActivityTest {
         closeSoftKeyboard();
         onView(withId(R.id.TC_Signup)).perform(click());
         onView(withId(R.id.sign_up_button)).perform(click());
-        onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters")));
+        onView(withText(R.string.failed_email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters")));
         SigupActivity.finish();
 
     }
