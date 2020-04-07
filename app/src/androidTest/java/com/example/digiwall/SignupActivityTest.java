@@ -100,6 +100,19 @@ public class LoginActivityTest {
         onView(withId(R.id.sign_up_button)).perform(click());
         onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Registration Successful! Check your Email for Verification link!")));
     }
+    @Test
+    public void FailedRegistrationTest() {
+        onView(withId(R.id.btn_noaccount)).perform(click());
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth1480@gmail.com"));
+        onView(withId(R.id.password_reg)).perform(typeText("saiva"));
+        onView(withId(R.id.Cpassword_reg)).perform(typeText("saiva"));
+        closeSoftKeyboard();
+        onView(withId(R.id.TC_Signup)).perform(click());
+        onView(withId(R.id.sign_up_button)).perform(click());
+        onView(withText(R.string.email_verification)).inRoot(new ToastMatcher()).check(matches(withText("Password too short, enter minimum 6 characters")));
+        SigupActivity.finish();
+
+    }
     @After
     public void tearDown() throws Exception {
         mActivity =null;
