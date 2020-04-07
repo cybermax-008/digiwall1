@@ -80,7 +80,7 @@ public class IncomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                int totalvalue=0;
+                double totalvalue=0.0;
 
                 for(DataSnapshot mysnapshot: dataSnapshot.getChildren() ){
 
@@ -88,7 +88,7 @@ public class IncomeFragment extends Fragment {
 
                     totalvalue+=data.getAmount();
 
-                    String stTotalvalue= String.valueOf(totalvalue);
+                    String stTotalvalue= String.format("%.2f", totalvalue);
                     income_total.setText(stTotalvalue+" CAD");
 
                 }
@@ -112,6 +112,7 @@ public class IncomeFragment extends Fragment {
                 holder.setType(model.getType());
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
+                holder.setName(model.getName());
                 holder.setAmount(model.getAmount());
             }
 
@@ -137,12 +138,34 @@ public class IncomeFragment extends Fragment {
 
         adapter.startListening();
 
+        if(searchView != null){
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+
+                    search(newText);
+                    return true;
+                }
+            });
+        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    private void search(String str){
+
+
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -169,6 +192,13 @@ public class IncomeFragment extends Fragment {
 
         }
 
+        private void setName(String name){
+
+            TextView mNote=mView.findViewById(R.id.name_txt_income);
+            mNote.setText(name);
+
+        }
+
         private void setDate(String date){
 
             TextView mDate=mView.findViewById(R.id.date_txt_income);
@@ -176,7 +206,7 @@ public class IncomeFragment extends Fragment {
 
         }
 
-        private void setAmount(int amount){
+        private void setAmount(double amount){
 
             TextView mAmount=mView.findViewById(R.id.amount_txt_income);
             String stamount=String.valueOf(amount);

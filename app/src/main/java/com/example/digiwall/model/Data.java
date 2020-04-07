@@ -4,28 +4,30 @@ import java.util.StringTokenizer;
 
 public class Data {
 
-    private int amount;
+    private double amount;
     private String type;
     private String note;
+    private String name;
     private String id;
     private String date;
 
     public Data(){
 
     }
-    public Data(int amount, String type, String note, String id, String date) {
+    public Data(double amount, String type, String note, String name,String id, String date) {
         this.amount = amount;
         this.type = type;
         this.note = note;
+        this.name =name;
         this.id = id;
         this.date = date;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -43,6 +45,14 @@ public class Data {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
