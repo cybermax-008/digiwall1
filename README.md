@@ -17,3 +17,4 @@ A simple but elegant android app to manage individual expenses and budget. One p
 - Add friends and contacts via email.
 - How much you Owe and How much you are Owed?
 - Manage shared expenses
+- adding a new line
