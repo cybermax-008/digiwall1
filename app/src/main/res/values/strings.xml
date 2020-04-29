@@ -31,6 +31,8 @@
     <string name="requires_verification">"Email not verified yet!"</string>
     <string name="logoutsuccessful">"Logged Out Succesfully!"</string>
     <string name="email_verification">"Registration Successful! Check your Email for Verification link!"</string>
+    <string name="failed_email_verification">"Password too short, enter minimum 6 characters"</string>
+    <string name="resetlink">"Password sent to your Email!"</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -22,7 +22,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
 
-public class TestSuite {
+public class LoginActivityTest {
     @Rule
     public ActivityTestRule<LoginActivity> mlogin=new ActivityTestRule<LoginActivity>(LoginActivity.class);
     private LoginActivity mActivity = null;
@@ -141,7 +141,7 @@ public class TestSuite {
     @Test
     public void RegisterTest() {
         onView(withId(R.id.btn_noaccount)).perform(click());
-        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth14@gmail.com"));
+        onView(withId(R.id.email_reg)).perform(typeText("saisankeerth112344@gmail.com"));
         onView(withId(R.id.password_reg)).perform(typeText("saivaishu10"));
         onView(withId(R.id.Cpassword_reg)).perform(typeText("saivaishu10"));
         closeSoftKeyboard();
